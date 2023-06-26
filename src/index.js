@@ -1,4 +1,10 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom"
+import React  from "react";
+import {createRoot} from "react-dom/client"
 import Main from "./Components/Main";
-ReactDOM.render(<Main/>, document.getElementById('root'))
+import './styles/stylesheet.css'
+const rootElement = document.getElementById('root')
+const root = createRoot( rootElement)
+
+root.render(
+<Main/>
+)
