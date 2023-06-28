@@ -22,13 +22,23 @@ class Main extends Component {
       }]
     }
     this.removePhoto = this.removePhoto.bind(this)
+    console.log('constructor')
   }
   removePhoto(postRemoved) {
     console.log(postRemoved.description)
     this.setState((state) =>
     ({posts: state.posts.filter(post => post !== postRemoved)}))
   }
+  componentDidMount(){
+    console.log('componentDidMount')
+  }
+  componentDidUpdate(prevProps, prevState){
+    alert('re-render')
+    console.log(prevState.posts)
+    console.log(this.state)
+  }
   render() {
+    console.log('render')
     return (
       <div>
         <Title title={"Photowall"} />
