@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Title from "./Title";
 import Photowall from "./PhotoWall";
-import AddPhoto from "./AdddPhoto";
+import AddPhoto from "./AddPhoto";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 class Main extends Component {
   constructor() {
@@ -21,42 +22,46 @@ class Main extends Component {
         description: "On a vacation!",
         imageLink: "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/08/24/104670887-VacationExplainsTHUMBWEB.1910x1000.jpg"
       }],
-      screen: 'photos'
+
     }
     this.removePhoto = this.removePhoto.bind(this)
-    this.navigate = this.navigate.bind(this)
   }
   removePhoto(postRemoved) {
     console.log(postRemoved.description)
     this.setState((state) =>
-    ({posts: state.posts.filter(post => post !== postRemoved)}))
+      ({ posts: state.posts.filter(post => post !== postRemoved) }))
   }
-  navigate(){
-    this.setState({
-      screen: "addPhoto"
-    })
-  }
-  componentDidMount(){
+
+  componentDidMount() {
     console.log('componentDidMount')
   }
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     console.log(prevState.posts)
     console.log(this.state)
   }
   render() {
     console.log('render')
     return (
-      <div>
-        { this.state.screen === 'photos' &&
+      <Router>
         <div>
-          
-        <Title title={"Photowall"} />
-        <Photowall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate = {this.navigate} />
-        </div>}
-        { this.state.screen === 'addPhoto'&&
-        <div><AddPhoto/></div>
-      }
+          <Routes>
+            <Route
+              path="/"
+              element={(
+                <div>
+                  <Title title={"Photowall"} />
+                  <Photowall
+                    posts={this.state.posts}
+                    onRemovePhoto={this.removePhoto}
+                    onNavigate={this.navigate}
+                  />
+                </div>
+              )}
+            />
+            <Route path="/addPhoto" element={<AddPhoto />} />
+          </Routes>
         </div>
+      </Router>
     )
   }
 }
