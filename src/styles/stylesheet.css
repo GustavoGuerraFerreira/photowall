@@ -131,7 +131,7 @@ html {
     
    }
    button:hover,.button:hover, button:focus, .button:focus {
-    border-color: #00f;
+    border-color:black;
     outline: 0;
    }
    .speech-bubble {
